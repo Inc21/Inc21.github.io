@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>inc21 — Safari iOS Userscript Install</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="src/site_images/logo_round.png" />
+  <meta name="description" content="Step-by-step guide to install the Strava Feed Filter userscript on Safari for iPhone/iPad." />
+</head>
+<body>
+  <header>
+    <div class="container site-header">
+      <a href="index.html#home" class="brand">
+        <img src="src/site_images/logo_round.png" alt="inc21 logo" class="logo" width="44" height="44" />
+        <span>inc21</span>
+      </a>
+      <nav class="nav">
+        <a href="index.html#home">Home</a>
+        <a href="index.html#projects">Projects</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="hero" id="safari-ios">
+      <h1>Install the Strava Feed Filter Userscript on Safari (iOS)</h1>
+      <p>A step-by-step guide to installing and enabling the userscript on Safari for iPhone/iPad.</p>
+      <div class="hero-actions">
+        <a class="btn btn--primary" href="src/downloads/sff-safari.user.js" download>Download userscript</a>
+        <a class="btn btn--ghost" href="https://github.com/Inc21/Tempermonkey-Strava-Feed-Filter/blob/main/ios-safari-install.md" target="_blank" rel="noopener">View guide on GitHub</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Requirements</h2>
+      <ul class="learning-list">
+        <li>iOS/iPadOS 15 or later.</li>
+        <li>A userscript manager that supports Safari on iOS. Recommended: "Userscripts" by Quoid (free).
+          <div class="install-badges" style="margin-top:.5rem">
+            <a class="badge-link" href="https://github.com/quoid/userscripts" target="_blank" rel="noopener">GitHub</a>
+            <a class="badge-link" href="https://apps.apple.com/ie/app/userscripts/id1463298887" target="_blank" rel="noopener">App Store</a>
+          </div>
+        </li>
+        <li>The userscript file: <code>sff-safari.user.js</code>.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>1) Install the Userscripts manager</h2>
+      <ul class="learning-list">
+        <li>Open the App Store and install "Userscripts" by Quoid.
+          <div class="install-badges" style="margin-top:.5rem">
+            <a class="badge-link" href="https://apps.apple.com/ie/app/userscripts/id1463298887" target="_blank" rel="noopener">Install Userscripts</a>
+            <a class="badge-link" href="https://github.com/quoid/userscripts" target="_blank" rel="noopener">Project page</a>
+          </div>
+        </li>
+        <li>After install, open the app at least once so it can create its folder.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>2) Enable Userscripts in Safari</h2>
+      <ul class="learning-list">
+        <li>Open iOS Settings → Safari → Extensions.</li>
+        <li>Tap "Userscripts" and set "Allow" for Safari.</li>
+        <li>Under "Websites", allow it for <code>strava.com</code> (Ask/Allow → Allow).</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>3) Prepare the Userscripts folder</h2>
+      <ul class="learning-list">
+        <li>Open the Files app → Browse.</li>
+        <li>Locate the Userscripts folder (On My iPhone → Userscripts). If you use iCloud Drive, it may be under iCloud Drive → Userscripts.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>4) Install the Strava Feed Filter userscript</h2>
+      <ul class="learning-list">
+        <li>Download directly into the Userscripts folder:
+          <div class="install-badges" style="margin-top:.5rem">
+            <a class="badge-link" href="src/downloads/sff-safari.user.js" download>Download from this site</a>
+          </div>
+        </li>
+        <li>Alternatively, download in Safari and then move it into the Userscripts folder via the Files app.</li>
+        <li>Ensure the file name ends with <code>.user.js</code> (sff-safari.user.js).</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>5) Enable on Strava</h2>
+      <ul class="learning-list">
+        <li>Open Safari and go to https://www.strava.com/</li>
+        <li>Tap the "AA" button in the address bar → Manage Extensions → ensure Userscripts is On.</li>
+        <li>If needed, tap Userscripts → Configure Websites → set strava.com to Allow.</li>
+        <li>Reload the page. You should see the Filter button appear on the Strava dashboard.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Updating the userscript</h2>
+      <p>Replace the existing <code>sff-safari.user.js</code> in the Userscripts folder with a newer version, then reload Strava.</p>
+    </section>
+
+    <section class="section">
+      <h2>Uninstalling</h2>
+      <ul class="learning-list">
+        <li>Open the Files app and delete <code>sff-safari.user.js</code> from the Userscripts folder.</li>
+        <li>In Safari → "AA" → Manage Extensions, you can also toggle Userscripts Off.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Troubleshooting</h2>
+      <ul class="learning-list">
+        <li>Filter button not visible:
+          <ul>
+            <li>Confirm Userscripts is enabled in Safari and allowed for strava.com.</li>
+            <li>Confirm the script file exists in the Userscripts folder and ends with <code>.user.js</code>.</li>
+            <li>Fully close Safari (swipe away) and relaunch.</li>
+          </ul>
+        </li>
+        <li>Script runs but features don’t seem active:
+          <ul>
+            <li>Ensure you are on the Strava dashboard (https://www.strava.com/dashboard).</li>
+            <li>Check the master toggle in the panel is enabled.</li>
+          </ul>
+        </li>
+        <li>Still stuck? Open a GitHub issue: <a href="https://github.com/Inc21/Tempermonkey-Strava-Feed-Filter/issues" target="_blank" rel="noopener">GitHub Issues</a>.</li>
+      </ul>
+    </section>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span><span id="y"></span> inc21.dev</span>
+      <a href="#safari-ios" class="to-top">Back to top ↑</a>
+    </div>
+  </footer>
+  <script>
+    (function(){
+      const y = document.getElementById('y');
+      if (y) y.textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
