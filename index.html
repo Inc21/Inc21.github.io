@@ -18,14 +18,14 @@
 <body>
     <header>
         <div class="container site-header">
-            <a href="#home" class="brand">
+            <a href="/" class="brand" data-target="#home" data-path="/">
                 <img src="src/site_images/logo_round.png" alt="INC21 logo" class="logo" width="44" height="44" loading="eager" fetchpriority="high">
                 <span>inc21</span>
             </a>
             <nav class="nav">
-                <a href="#home">Home</a>
-                <a href="#projects">Projects</a>
-                <a href="#contact">Contact</a>
+                <a href="/" data-target="#home" data-path="/">Home</a>
+                <a href="/projects" data-target="#projects" data-path="/projects">Projects</a>
+                <a href="/contact" data-target="#contact" data-path="/contact">Contact</a>
             </nav>
         </div>
     </header>
@@ -33,10 +33,10 @@
     <div class="container">
         <section id="home" class="hero">
             <h1>I'm Indrek</h1>
-            <p>A recent Code Institute Full Stack Bootcamp graduate, passionate about crafting innovative solutions and turning ideas into code.</p>
+            <p>I tinker with tech to solve real-life problems, balancing full-time work, family life, and serious cycling miles with late-night coding sessions that keep ideas moving.</p>
             <div class="hero-actions">
-                <a class="btn btn--primary" href="#projects">View Projects</a>
-                <a class="btn btn--ghost" href="#contact">Contact</a>
+                <a class="btn btn--primary" href="/projects" data-target="#projects" data-path="/projects">View Projects</a>
+                <a class="btn btn--ghost" href="/contact" data-target="#contact" data-path="/contact">Contact</a>
             </div>
         </section>
 
@@ -62,6 +62,7 @@
         <section class="section">
             <h2>🚀 Tech Enthusiast</h2>
             <p>I love building seamless, user-friendly apps. From front-end design to back-end logic — I enjoy making things that work and feel great.</p>
+            <p>Lately that means blending thoughtful UI craft, steady backend engineering, and AI-assisted vibe coding sessions that keep the focus on creative problem solving and polished user journeys.</p>
         </section>
 
         <section class="section">
@@ -73,30 +74,6 @@
                 <li><strong>Advanced Git workflows</strong> - Version control mastery</li>
                 <li><strong>Clean architecture</strong> - Better code organization</li>
             </ul>
-        </section>
-
-        <section class="section">
-            <h2>🤖 AI & Vibe Coding</h2>
-            <p>Embracing the future of development with AI-powered tools and that perfect coding flow state! Here's what gets me excited:</p>
-            
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <h3>🎯 Android + AI</h3>
-                    <p>Building intelligent mobile apps with Google ML Kit, Gemini integration, and Firebase AI features</p>
-                </div>
-                <div class="skill-card">
-                    <h3>⚡ Vibe Coding</h3>
-                    <p>That perfect flow state where code just flows - enhanced by AI assistants like Gemini in Android Studio</p>
-                </div>
-                <div class="skill-card">
-                    <h3>🧠 Smart Features</h3>
-                    <p>Integrating text recognition, image analysis, and intelligent user experiences into Android apps</p>
-                </div>
-            </div>
-            
-            <p style="margin-top: 2rem; font-style: italic; color: #666;">
-                "The best code happens when you're in the zone - and AI tools help you stay there longer, focusing on the creative problem-solving rather than boilerplate syntax."
-            </p>
         </section>
 
         <section id="projects" class="section">
@@ -147,8 +124,24 @@
             <h2>🤝 Let's Connect!</h2>
             <p>I'd love to connect with other devs, techies, and collaborators. Hit me up below:</p>
             <div class="contact-links">
-                <a href="https://github.com/Inc21" class="contact-link" target="_blank">GitHub</a>
-                <a href="https://www.linkedin.com/in/indrek-mannik-038770259/" class="contact-link" target="_blank">LinkedIn</a>
+                <a href="https://github.com/Inc21" class="contact-link" target="_blank">
+                    <svg class="contact-link-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path fill="currentColor" d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.5-1.5-1.9-1.5-1.9-1.2-.8 0-.8 0-.8 1.3.1 2 1.3 2 1.3 1.1 2 2.9 1.4 3.6 1.1.1-.8.4-1.4.7-1.7-2.7-.3-5.5-1.4-5.5-6.1 0-1.4.5-2.6 1.3-3.6-.2-.3-.6-1.6.1-3.4 0 0 1-.3 3.4 1.3a11.6 11.6 0 0 1 6.2 0c2.4-1.6 3.4-1.3 3.4-1.3.7 1.8.3 3.1.1 3.4.8 1 1.3 2.2 1.3 3.6 0 4.7-2.9 5.8-5.6 6.1.4.3.8 1 .8 2v3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/>
+                    </svg>
+                    <span class="contact-link-text">GitHub</span>
+                </a>
+                <a href="https://www.linkedin.com/in/indrek-mannik-038770259/" class="contact-link" target="_blank">
+                    <svg class="contact-link-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h3.9v12H3zM9.75 9H13v1.9h.05c.45-.86 1.54-1.77 3.18-1.77 3.4 0 4.03 2.24 4.03 5.15V21H16.3v-5.3c0-1.27-.03-2.9-1.77-2.9-1.77 0-2.05 1.38-2.05 2.8V21H9.75z"/>
+                    </svg>
+                    <span class="contact-link-text">LinkedIn</span>
+                </a>
+                <a href="https://www.strava.com/athletes/inc21" class="contact-link" target="_blank">
+                    <svg class="contact-link-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path fill="currentColor" d="M15.5 3 10 15h3l2.5-5 2.5 5h3L16.5 3h-1zM5 9l4.5 9 4.5-9H12l-2.5 5L7 9H5z"/>
+                    </svg>
+                    <span class="contact-link-text">Strava</span>
+                </a>
             </div>
             <p style="margin-top: 2rem; font-size: 1.2rem;">
                 <strong>Thanks for stopping by — let's code something amazing together!</strong>
@@ -164,16 +157,72 @@
     <footer class="site-footer">
         <div class="container footer-inner">
             <span> <span id="y"></span> inc21.dev</span>
-            <a href="#home" class="to-top">Back to top </a>
+            <a href="/" class="to-top" data-target="#home" data-path="/">Back to top </a>
         </div>
     </footer>
 
     <script>
-        // Smooth active nav + header collapsed state
+        // Smooth active nav + header collapsed state + clean URL routing support
         (function() {
           const header = document.querySelector('header');
-          const navLinks = Array.from(document.querySelectorAll('.nav a'));
-          const sections = navLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+          const navLinks = Array.from(document.querySelectorAll('.nav a[data-target]'));
+          const targetLinks = Array.from(document.querySelectorAll('a[data-target]'));
+          const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+          const targetToPath = new Map();
+          const pathToTarget = new Map();
+
+          const normalizePath = (path) => {
+            if (!path) return '/';
+            try {
+              const url = new URL(path, window.location.origin);
+              path = url.pathname;
+            } catch (err) {
+              // ignore, fallback to manual normalization
+            }
+            let normalized = path.startsWith('/') ? path : '/' + path;
+            if (normalized.length > 1) {
+              normalized = normalized.replace(/\/+$/, '');
+            }
+            return normalized === '' ? '/' : normalized;
+          };
+
+          targetLinks.forEach(link => {
+            const target = link.dataset.target;
+            if (!target) return;
+            const path = normalizePath(link.dataset.path || link.getAttribute('href'));
+            targetToPath.set(target, path);
+            if (!pathToTarget.has(path)) pathToTarget.set(path, target);
+          });
+
+          pathToTarget.set('/', pathToTarget.get('/') || '#home');
+          pathToTarget.set('/index.html', '#home');
+          pathToTarget.set('/index', '#home');
+
+          const setActiveByTarget = (targetSelector) => {
+            navLinks.forEach(link => {
+              link.classList.toggle('active', link.dataset.target === targetSelector);
+            });
+          };
+
+          const scrollToTarget = (targetSelector, behavior = 'smooth') => {
+            const element = document.querySelector(targetSelector);
+            if (!element) return;
+            const scrollBehavior = prefersReducedMotion.matches ? 'auto' : behavior;
+            element.scrollIntoView({ behavior: scrollBehavior, block: 'start' });
+          };
+
+          const updateHistory = (targetSelector, method = 'replace') => {
+            const path = targetToPath.get(targetSelector) || '/';
+            const currentPath = normalizePath(window.location.pathname);
+            let historyMethod = method;
+            if (path === currentPath && method === 'push') historyMethod = 'replace';
+            const state = { target: targetSelector, path };
+            if (historyMethod === 'push') {
+              history.pushState(state, '', path);
+            } else {
+              history.replaceState(state, '', path);
+            }
+          };
 
           // Toggle header compact style on scroll
           const onScroll = () => {
@@ -182,19 +231,77 @@
           window.addEventListener('scroll', onScroll, { passive: true });
           onScroll();
 
-          // Highlight active nav item
+          // Highlight active nav item + sync URL
+          const observedSections = Array.from(new Set(navLinks
+            .map(link => link.dataset.target)
+            .filter(Boolean)))
+            .map(selector => document.querySelector(selector))
+            .filter(Boolean);
+
           const io = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-              const id = '#' + entry.target.id;
-              const link = navLinks.find(l => l.getAttribute('href') === id);
-              if (!link) return;
-              if (entry.isIntersecting) {
-                navLinks.forEach(l => l.classList.remove('active'));
-                link.classList.add('active');
-              }
+              if (!entry.isIntersecting) return;
+              const targetSelector = '#' + entry.target.id;
+              if (!targetToPath.has(targetSelector)) return;
+              setActiveByTarget(targetSelector);
+              updateHistory(targetSelector, 'replace');
             });
           }, { rootMargin: '-40% 0px -55% 0px', threshold: 0.01 });
-          sections.forEach(s => io.observe(s));
+          observedSections.forEach(section => io.observe(section));
+
+          // Intercept internal links for smooth pushState navigation
+          targetLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+              const targetSelector = link.dataset.target;
+              if (!targetSelector) return;
+              if (link.origin !== window.location.origin) return;
+              event.preventDefault();
+              updateHistory(targetSelector, 'push');
+              setActiveByTarget(targetSelector);
+              scrollToTarget(targetSelector, 'smooth');
+            });
+          });
+
+          // Handle initial load and redirected paths (GitHub Pages SPA fallback)
+          const storedRedirect = sessionStorage.getItem('redirectPath');
+          if (storedRedirect) sessionStorage.removeItem('redirectPath');
+
+          const resolveTarget = (pathname, hash) => {
+            const normalizedPath = normalizePath(pathname);
+            return pathToTarget.get(normalizedPath) || (hash && document.querySelector(hash) ? hash : null);
+          };
+
+          let initialTarget = null;
+          if (storedRedirect) {
+            try {
+              const redirectURL = new URL(storedRedirect, window.location.origin);
+              initialTarget = resolveTarget(redirectURL.pathname, redirectURL.hash);
+            } catch (err) {
+              initialTarget = resolveTarget(storedRedirect, null);
+            }
+          }
+
+          if (!initialTarget) {
+            initialTarget = resolveTarget(window.location.pathname, window.location.hash) || '#home';
+          }
+
+          if (!initialTarget || !document.querySelector(initialTarget)) {
+            initialTarget = '#home';
+          }
+
+          setActiveByTarget(initialTarget);
+          updateHistory(initialTarget, 'replace');
+
+          if (initialTarget !== '#home') {
+            requestAnimationFrame(() => scrollToTarget(initialTarget, 'auto'));
+          }
+
+          // Sync scroll when using browser navigation
+          window.addEventListener('popstate', () => {
+            const targetSelector = resolveTarget(window.location.pathname, window.location.hash) || '#home';
+            setActiveByTarget(targetSelector);
+            scrollToTarget(targetSelector, 'auto');
+          });
 
           // Footer year
           const y = document.getElementById('y');
