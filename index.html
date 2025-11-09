@@ -216,8 +216,9 @@
           pathToTarget.set('/index', '#home');
 
           const pendingGoatcounterPayloads = [];
-          let goatcounterPollHandle = null;
-          let analyticsToast = document.getElementById('analytics-toast');
+          let goatcounterCheckTimer = null;
+          let toastTimer = null;
+          const analyticsToast = document.getElementById('analytics-toast');
           const dismissToastBtn = analyticsToast ? analyticsToast.querySelector('[data-analytics-dismiss-toast]') : null;
           const toastDismissKey = 'analytics_toast_dismissed';
           let toastDismissed = false;
@@ -229,65 +230,75 @@
             toastDismissed = false;
           }
 
-          const goatcounterReady = () => window.goatcounter && typeof window.goatcounter.count === 'function';
-          let goatcounterScriptLoaded = false;
-          let goatcounterScriptFailed = false;
-          let goatcounterInitialized = false;
-          let toastDelayHandle = null;
-          let readinessRetryHandle = null;
-
-          const goatcounterScript = document.querySelector('script[data-goatcounter]');
-          if (goatcounterScript) {
-            goatcounterScript.addEventListener('load', () => {
-              goatcounterScriptLoaded = true;
-              attemptGoatcounterReady(8);
-            });
-            goatcounterScript.addEventListener('error', () => {
-              goatcounterScriptFailed = true;
-              showToast();
-            });
-          }
-
-          const clearToastDelay = () => {
-            if (toastDelayHandle) {
-              window.clearTimeout(toastDelayHandle);
-              toastDelayHandle = null;
-            }
-          };
-
-          const clearReadinessRetry = () => {
-            if (readinessRetryHandle) {
-              window.clearTimeout(readinessRetryHandle);
-              readinessRetryHandle = null;
-            }
-          };
-
-          const markGoatcounterReady = () => {
-            if (goatcounterReady()) {
-              goatcounterInitialized = true;
-              hideToast();
-              clearToastDelay();
-              clearReadinessRetry();
-              return true;
-            }
-            return false;
-          };
-
-          const attemptGoatcounterReady = (retries) => {
-            if (markGoatcounterReady()) return;
-            if (typeof retries === 'number' && retries > 0) {
-              readinessRetryHandle = window.setTimeout(() => attemptGoatcounterReady(retries - 1), 250);
-            }
-          };
+          const goatcounterReady = () => typeof window.goatcounter === 'object' && typeof window.goatcounter.count === 'function';
 
           const hideToast = () => {
             if (analyticsToast && !toastRemoved) analyticsToast.hidden = true;
-            clearToastDelay();
+            if (toastTimer) {
+              window.clearTimeout(toastTimer);
+              toastTimer = null;
+            }
           };
 
           const showToast = () => {
             if (toastDismissed || toastRemoved) return;
             if (analyticsToast && analyticsToast.hidden) analyticsToast.hidden = false;
+          };
+
+          const scheduleToastIfBlocked = () => {
+            if (toastTimer || toastDismissed || toastRemoved) return;
+            toastTimer = window.setTimeout(() => {
+              toastTimer = null;
+              if (!goatcounterReady()) showToast();
+            }, 2000);
+          };
+
+          const clearGoatcounterCheck = () => {
+            if (goatcounterCheckTimer) {
+              window.clearInterval(goatcounterCheckTimer);
+              goatcounterCheckTimer = null;
+            }
+          };
+
+          const drainPendingEvents = () => {
+            if (!goatcounterReady()) return false;
+            hideToast();
+            clearGoatcounterCheck();
+            while (pendingGoatcounterPayloads.length) {
+              const payload = pendingGoatcounterPayloads.shift();
+              try {
+                window.goatcounter.count(payload);
+              } catch (err) {
+                console.error('GoatCounter count error', err, payload);
+              }
+            }
+            return true;
+          };
+
+          const ensureGoatcounter = () => {
+            if (drainPendingEvents()) return;
+            if (!goatcounterCheckTimer) {
+              goatcounterCheckTimer = window.setInterval(() => {
+                if (drainPendingEvents()) {
+                  hideToast();
+                }
+              }, 400);
+            }
+            scheduleToastIfBlocked();
+          };
+
+          const sendToGoatcounter = (payload) => {
+            if (goatcounterReady()) {
+              try {
+                window.goatcounter.count(payload);
+              } catch (err) {
+                console.error('GoatCounter count error', err, payload);
+              }
+              hideToast();
+              return;
+            }
+            pendingGoatcounterPayloads.push(payload);
+            ensureGoatcounter();
           };
 
           const permanentlyDismissToast = () => {
@@ -300,68 +311,29 @@
             }
             if (analyticsToast && !toastRemoved) {
               analyticsToast.remove();
-              analyticsToast = null;
               toastRemoved = true;
             }
           };
 
           dismissToastBtn && dismissToastBtn.addEventListener('click', permanentlyDismissToast);
 
-          const scheduleToastWatch = () => {
-            if (toastDismissed || toastRemoved || goatcounterScriptFailed) return;
-            if (toastDelayHandle) return;
-            toastDelayHandle = window.setTimeout(() => {
-              toastDelayHandle = null;
-              if (!markGoatcounterReady() && !goatcounterScriptLoaded && !toastDismissed && !toastRemoved) {
-                showToast();
-              }
-            }, 3200);
-          };
-
-          const flushGoatcounterQueue = () => {
-            if (!goatcounterReady()) {
-              goatcounterPollHandle = window.setTimeout(flushGoatcounterQueue, 120);
-              scheduleToastWatch();
-              return;
-            }
-            while (pendingGoatcounterPayloads.length) {
-              const payload = pendingGoatcounterPayloads.shift();
-              try {
-                window.goatcounter.count(payload);
-              } catch (err) {
-                console.error('GoatCounter count error', err, payload);
-              }
-            }
-            goatcounterPollHandle = null;
-            markGoatcounterReady();
-          };
-
-          const sendToGoatcounter = (payload) => {
-            if (goatcounterReady()) {
-              try {
-                window.goatcounter.count(payload);
-              } catch (err) {
-                console.error('GoatCounter count error', err, payload);
-              }
-              markGoatcounterReady();
-              return;
-            }
-            pendingGoatcounterPayloads.push(payload);
-            if (goatcounterPollHandle == null) {
-              flushGoatcounterQueue();
-            }
-            scheduleToastWatch();
-          };
+          const goatcounterScript = document.querySelector('script[data-goatcounter]');
+          if (goatcounterScript) {
+            goatcounterScript.addEventListener('load', () => {
+              drainPendingEvents();
+            });
+            goatcounterScript.addEventListener('error', () => {
+              showToast();
+            });
+          }
 
           if (document.readyState === 'complete') {
-            scheduleToastWatch();
-            attemptGoatcounterReady(8);
+            drainPendingEvents();
           } else {
-            window.addEventListener('load', () => {
-              scheduleToastWatch();
-              attemptGoatcounterReady(8);
-            }, { once: true });
+            window.addEventListener('load', drainPendingEvents, { once: true });
           }
+
+          ensureGoatcounter();
 
           const trackAnalyticsEvent = (element) => {
             if (!element || !element.dataset) return;

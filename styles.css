@@ -464,6 +464,10 @@ header.is-scrolled {
     backdrop-filter: blur(8px);
 }
 
+.analytics-toast[hidden] {
+    display: none !important;
+}
+
 .analytics-toast__actions {
     display: flex;
     gap: 0.75rem;
