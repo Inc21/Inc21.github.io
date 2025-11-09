@@ -16,15 +16,8 @@
     <meta name="twitter:card" content="summary">
 </head>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-JW319QFQGM"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-JW319QFQGM');
-</script>
+<script data-goatcounter="https://inc21.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 
 <body>
     <header>
@@ -210,21 +203,22 @@
           pathToTarget.set('/index', '#home');
 
           const trackAnalyticsEvent = (element) => {
-            if (typeof window.gtag !== 'function') return;
+            const goatcounter = window.goatcounter;
+            if (!goatcounter || typeof goatcounter.count !== 'function') return;
             if (!element || !element.dataset) return;
-            const eventName = element.dataset.analyticsEvent;
-            if (!eventName) return;
-            const params = {};
-            const category = element.dataset.analyticsCategory;
-            const label = element.dataset.analyticsLabel;
+            const eventName = element.dataset.analyticsEvent || 'interaction';
+            const category = element.dataset.analyticsCategory || 'general';
+            const label = element.dataset.analyticsLabel || '';
             const value = element.dataset.analyticsValue;
-            if (category) params.event_category = category;
-            if (label) params.event_label = label;
-            if (value !== undefined) {
-              const numericValue = Number(value);
-              params.value = Number.isFinite(numericValue) ? numericValue : value;
-            }
-            window.gtag('event', eventName, params);
+            const segments = ['event', category, eventName];
+            if (label) segments.push(label);
+            const payload = {
+              path: segments.join('/'),
+              title: label || eventName,
+              event: true
+            };
+            if (value !== undefined) payload.value = value;
+            goatcounter.count(payload);
           };
 
           const analyticsLinks = Array.from(document.querySelectorAll('[data-analytics-event]')).filter(link => !link.dataset.target);
