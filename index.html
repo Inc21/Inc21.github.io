@@ -15,6 +15,17 @@
     <meta property="og:url" content="https://inc21.dev/">
     <meta name="twitter:card" content="summary">
 </head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JW319QFQGM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-JW319QFQGM');
+</script>
+
 <body>
     <header>
         <div class="container site-header">
@@ -35,8 +46,8 @@
             <h1>I'm Indrek</h1>
             <p>I tinker with tech to solve real-life problems, balancing full-time work, family life, and serious cycling miles with late-night coding sessions that keep ideas moving.</p>
             <div class="hero-actions">
-                <a class="btn btn--primary" href="/projects" data-target="#projects" data-path="/projects">View Projects</a>
-                <a class="btn btn--ghost" href="/contact" data-target="#contact" data-path="/contact">Contact</a>
+                <a class="btn btn--primary" href="/projects" data-target="#projects" data-path="/projects" data-analytics-event="hero_cta" data-analytics-category="hero" data-analytics-label="view_projects">View Projects</a>
+                <a class="btn btn--ghost" href="/contact" data-target="#contact" data-path="/contact" data-analytics-event="hero_cta" data-analytics-category="hero" data-analytics-label="contact">Contact</a>
             </div>
         </section>
 
@@ -93,25 +104,25 @@
                         <span class="chip">Safari (iOS)</span>
                     </div>
                     <div class="install-badges">
-                        <a class="badge-link" href="https://chromewebstore.google.com/detail/geihkfcdimdmlckcgkebcdajdlmeppff?utm_source=item-share-cb" target="_blank" rel="noopener" title="Chrome (Desktop)">
+                        <a class="badge-link" href="https://chromewebstore.google.com/detail/geihkfcdimdmlckcgkebcdajdlmeppff?utm_source=item-share-cb" target="_blank" rel="noopener" title="Chrome (Desktop)" data-analytics-event="project_install_click" data-analytics-category="projects" data-analytics-label="chrome_web_store">
                             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#4285F4"/></svg>
                             Chrome (Desktop)
                         </a>
-                        <a class="badge-link" href="https://addons.mozilla.org/en-US/firefox/addon/strava-feed-filter/" target="_blank" rel="noopener" title="Firefox (Desktop & Android)">
+                        <a class="badge-link" href="https://addons.mozilla.org/en-US/firefox/addon/strava-feed-filter/" target="_blank" rel="noopener" title="Firefox (Desktop & Android)" data-analytics-event="project_install_click" data-analytics-category="projects" data-analytics-label="firefox_addon">
                             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c5.5 0 10 4.5 10 10a10 10 0 0 1-17.1 7.1C7 17 9.5 15 13 15c2 0 3.5-1.5 3.5-3.5S15 8 13 8c-1.5 0-3 .5-4 1.6C9.5 5.6 11.4 2 12 2z" fill="#FF7139"/></svg>
                             Firefox (Desktop & Android)
                         </a>
-                        <a class="badge-link" href="https://greasyfork.org/en/scripts/550272-strava-feed-filter" target="_blank" rel="noopener" title="Userscript (Greasy Fork)">
+                        <a class="badge-link" href="https://greasyfork.org/en/scripts/550272-strava-feed-filter" target="_blank" rel="noopener" title="Userscript (Greasy Fork)" data-analytics-event="project_install_click" data-analytics-category="projects" data-analytics-label="greasy_fork">
                             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3" fill="#e6d9b7"/><rect x="6" y="6" width="5" height="12" fill="#111"/><rect x="13" y="6" width="5" height="12" fill="#111"/></svg>
                             Userscript (Greasy Fork)
                         </a>
-                        <a class="badge-link" href="safari-ios.html" rel="noopener">
+                        <a class="badge-link" href="safari-ios.html" rel="noopener" data-analytics-event="project_install_click" data-analytics-category="projects" data-analytics-label="safari_ios_guide">
                             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm3.5 3.5-3 7-7 3 3-7 7-3z" fill="#0fb5ff"/></svg>
                             Safari (iOS) Install Guide
                         </a>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/Inc21/Tempermonkey-Strava-Feed-Filter" target="_blank">
+                        <a href="https://github.com/Inc21/Tempermonkey-Strava-Feed-Filter" target="_blank" data-analytics-event="project_repo_click" data-analytics-category="projects" data-analytics-label="tempermonkey_strava_feed_filter_repo">
                             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.5-1.5-1.9-1.5-1.9-1.2-.8 0-.8 0-.8 1.3.1 2 1.3 2 1.3 1.1 2 2.9 1.4 3.6 1.1.1-.8.4-1.4.7-1.7-2.7-.3-5.5-1.4-5.5-6.1 0-1.4.5-2.6 1.3-3.6-.2-.3-.6-1.6.1-3.4 0 0 1-.3 3.4 1.3a11.6 11.6 0 0 1 6.2 0c2.4-1.6 3.4-1.3 3.4-1.3.7 1.8.3 3.1.1 3.4.8 1 1.3 2.2 1.3 3.6 0 4.7-2.9 5.8-5.6 6.1.4.3.8 1 .8 2v3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg>
                             GitHub
                         </a>
@@ -124,19 +135,19 @@
             <h2>🤝 Let's Connect!</h2>
             <p>I'd love to connect with other devs, techies, and collaborators. Hit me up below:</p>
             <div class="contact-links">
-                <a href="https://github.com/Inc21" class="contact-link" target="_blank">
+                <a href="https://github.com/Inc21" class="contact-link" target="_blank" data-analytics-event="contact_click" data-analytics-category="contact" data-analytics-label="github">
                     <svg class="contact-link-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                         <path fill="currentColor" d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.5-1.5-1.9-1.5-1.9-1.2-.8 0-.8 0-.8 1.3.1 2 1.3 2 1.3 1.1 2 2.9 1.4 3.6 1.1.1-.8.4-1.4.7-1.7-2.7-.3-5.5-1.4-5.5-6.1 0-1.4.5-2.6 1.3-3.6-.2-.3-.6-1.6.1-3.4 0 0 1-.3 3.4 1.3a11.6 11.6 0 0 1 6.2 0c2.4-1.6 3.4-1.3 3.4-1.3.7 1.8.3 3.1.1 3.4.8 1 1.3 2.2 1.3 3.6 0 4.7-2.9 5.8-5.6 6.1.4.3.8 1 .8 2v3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/>
                     </svg>
                     <span class="contact-link-text">GitHub</span>
                 </a>
-                <a href="https://www.linkedin.com/in/indrek-mannik-038770259/" class="contact-link" target="_blank">
+                <a href="https://www.linkedin.com/in/indrek-mannik-038770259/" class="contact-link" target="_blank" data-analytics-event="contact_click" data-analytics-category="contact" data-analytics-label="linkedin">
                     <svg class="contact-link-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                         <path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h3.9v12H3zM9.75 9H13v1.9h.05c.45-.86 1.54-1.77 3.18-1.77 3.4 0 4.03 2.24 4.03 5.15V21H16.3v-5.3c0-1.27-.03-2.9-1.77-2.9-1.77 0-2.05 1.38-2.05 2.8V21H9.75z"/>
                     </svg>
                     <span class="contact-link-text">LinkedIn</span>
                 </a>
-                <a href="https://www.strava.com/athletes/inc21" class="contact-link" target="_blank">
+                <a href="https://www.strava.com/athletes/inc21" class="contact-link" target="_blank" data-analytics-event="contact_click" data-analytics-category="contact" data-analytics-label="strava">
                     <svg class="contact-link-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                         <path fill="currentColor" d="M15.5 3 10 15h3l2.5-5 2.5 5h3L16.5 3h-1zM5 9l4.5 9 4.5-9H12l-2.5 5L7 9H5z"/>
                     </svg>
@@ -198,6 +209,29 @@
           pathToTarget.set('/index.html', '#home');
           pathToTarget.set('/index', '#home');
 
+          const trackAnalyticsEvent = (element) => {
+            if (typeof window.gtag !== 'function') return;
+            if (!element || !element.dataset) return;
+            const eventName = element.dataset.analyticsEvent;
+            if (!eventName) return;
+            const params = {};
+            const category = element.dataset.analyticsCategory;
+            const label = element.dataset.analyticsLabel;
+            const value = element.dataset.analyticsValue;
+            if (category) params.event_category = category;
+            if (label) params.event_label = label;
+            if (value !== undefined) {
+              const numericValue = Number(value);
+              params.value = Number.isFinite(numericValue) ? numericValue : value;
+            }
+            window.gtag('event', eventName, params);
+          };
+
+          const analyticsLinks = Array.from(document.querySelectorAll('[data-analytics-event]')).filter(link => !link.dataset.target);
+          analyticsLinks.forEach(link => {
+            link.addEventListener('click', () => trackAnalyticsEvent(link));
+          });
+
           const setActiveByTarget = (targetSelector) => {
             navLinks.forEach(link => {
               link.classList.toggle('active', link.dataset.target === targetSelector);
@@ -256,6 +290,7 @@
               if (!targetSelector) return;
               if (link.origin !== window.location.origin) return;
               event.preventDefault();
+              trackAnalyticsEvent(link);
               updateHistory(targetSelector, 'push');
               setActiveByTarget(targetSelector);
               scrollToTarget(targetSelector, 'smooth');
