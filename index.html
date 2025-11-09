@@ -165,6 +165,19 @@
         </div>
     </footer>
 
+    <aside id="analytics-toast" class="analytics-toast" hidden role="status" aria-live="polite">
+        <div>
+            <strong>Analytics blocked</strong>
+        </div>
+        <div>
+            Looks like an extension is blocking analytics. I only track anonymous button click counts — no cookies, no personal data.
+            If you’d like to help, please allow this site in your blocker or whitelist the loaded analytics script.
+        </div>
+        <div class="analytics-toast__actions">
+            <button type="button" class="analytics-toast__btn" data-analytics-dismiss-toast>Dismiss</button>
+        </div>
+    </aside>
+
     <script>
         // Smooth active nav + header collapsed state + clean URL routing support
         (function() {
@@ -202,9 +215,77 @@
           pathToTarget.set('/index.html', '#home');
           pathToTarget.set('/index', '#home');
 
-          const trackAnalyticsEvent = (element) => {
+          const pendingGoatcounterPayloads = [];
+          let goatcounterPollHandle = null;
+          const analyticsToast = document.getElementById('analytics-toast');
+          const dismissToastBtn = analyticsToast ? analyticsToast.querySelector('[data-analytics-dismiss-toast]') : null;
+          const toastDismissKey = 'analytics_toast_dismissed';
+          let toastDismissed = false;
+
+          try {
+            toastDismissed = localStorage.getItem(toastDismissKey) === '1';
+          } catch (err) {
+            toastDismissed = false;
+          }
+
+          const hideToast = () => {
+            if (analyticsToast) analyticsToast.hidden = true;
+          };
+
+          const showToast = () => {
+            if (toastDismissed) return;
+            if (analyticsToast && analyticsToast.hidden) analyticsToast.hidden = false;
+          };
+
+          const permanentlyDismissToast = () => {
+            toastDismissed = true;
+            hideToast();
+            try {
+              localStorage.setItem(toastDismissKey, '1');
+            } catch (err) {
+              // ignore storage errors
+            }
+          };
+
+          dismissToastBtn && dismissToastBtn.addEventListener('click', permanentlyDismissToast);
+
+          const flushGoatcounterQueue = () => {
             const goatcounter = window.goatcounter;
-            if (!goatcounter || typeof goatcounter.count !== 'function') return;
+            if (!goatcounter || typeof goatcounter.count !== 'function') {
+              goatcounterPollHandle = window.setTimeout(flushGoatcounterQueue, 120);
+              showToast();
+              return;
+            }
+            while (pendingGoatcounterPayloads.length) {
+              const payload = pendingGoatcounterPayloads.shift();
+              try {
+                goatcounter.count(payload);
+              } catch (err) {
+                console.error('GoatCounter count error', err, payload);
+              }
+            }
+            goatcounterPollHandle = null;
+            hideToast();
+          };
+
+          const sendToGoatcounter = (payload) => {
+            const goatcounter = window.goatcounter;
+            if (goatcounter && typeof goatcounter.count === 'function') {
+              try {
+                goatcounter.count(payload);
+              } catch (err) {
+                console.error('GoatCounter count error', err, payload);
+              }
+              hideToast();
+              return;
+            }
+            pendingGoatcounterPayloads.push(payload);
+            if (goatcounterPollHandle == null) {
+              flushGoatcounterQueue();
+            }
+          };
+
+          const trackAnalyticsEvent = (element) => {
             if (!element || !element.dataset) return;
             const eventName = element.dataset.analyticsEvent || 'interaction';
             const category = element.dataset.analyticsCategory || 'general';
@@ -213,12 +294,12 @@
             const segments = ['event', category, eventName];
             if (label) segments.push(label);
             const payload = {
-              path: segments.join('/'),
+              path: '/' + segments.join('/'),
               title: label || eventName,
               event: true
             };
             if (value !== undefined) payload.value = value;
-            goatcounter.count(payload);
+            sendToGoatcounter(payload);
           };
 
           const analyticsLinks = Array.from(document.querySelectorAll('[data-analytics-event]')).filter(link => !link.dataset.target);
